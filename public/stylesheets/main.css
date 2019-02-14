@@ -1,0 +1,63 @@
+
+
+.game {
+    margin: 16px 0 16px 0;
+    background-color: #555;
+    width: 360px;
+    border: 1px solid #555;
+    border-radius: 8px;
+}
+
+.game-row {
+    display: flex;
+    flex-direction: row;
+    flex: 0;
+}
+
+.cube {
+    height: 80px;
+    width: 80px;
+    margin: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cube-input {
+  font-size: 32px;
+  width: 72px;
+  height: 72px;
+  border: none;
+  text-align: center;
+}
+.cube-input:active,
+.cube-input:focus {
+  border: none;
+}
+
+input.invalid {
+    border: 1px solid red;
+}
+
+.button-container {
+  width: 360px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.hidden {
+  display: none;
+}
+
+.results-panel {
+  margin: 16px 0 16px 0;
+  display: flex;
+  flex-direction: column;
+  width: 360px;
+  align-items: center;
+}
+
+#valid-words {
+  width: 100%;
+}
