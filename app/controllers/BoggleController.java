@@ -19,7 +19,7 @@ public class BoggleController extends Controller {
 
     static {
         dictionary = new BinarySearchBoggleDictionary();
-        InputStream is = BoggleController.class.getClassLoader().getResourceAsStream("dictionary.txt");
+        InputStream is = BoggleController.class.getClassLoader().getResourceAsStream("scrabble.txt");
         try {
             dictionary.load(is);
         } catch (IOException e) {

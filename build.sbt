@@ -16,3 +16,5 @@ libraryDependencies += "org.webjars.npm" % "lodash" % "4.17.11"
 libraryDependencies += "org.webjars.npm" % "axios" % "0.18.0"
 libraryDependencies += "org.webjars.npm" % "vue" % "2.6.6"
 libraryDependencies += "org.webjars" % "bootstrap" % "4.2.1"
+
+dockerExposedPorts in Docker := Seq(9000)
