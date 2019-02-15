@@ -1,5 +1,4 @@
 
-
 .game {
     margin: 16px 0 16px 0;
     background-color: #555;
@@ -60,4 +59,12 @@ input.invalid {
 
 #valid-words {
   width: 100%;
+}
+
+
+@media (max-width: 400px) {
+    .container {
+        padding-right: 8px;
+        padding-left: 8px;
+    }
 }

@@ -22,7 +22,7 @@ public class BinarySearchBoggleDictionary implements BoggleDictionary {
         try {
             while ((line = reader.readLine()) != null) {
                 // we only care about words that contain less than 16 characters
-                if (line.length() <= 16) {
+                if (line.length() >= 2 && line.length() <= 16) {
                     words.add(line);
                 }
             }

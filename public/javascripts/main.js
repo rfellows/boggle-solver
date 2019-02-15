@@ -84,6 +84,7 @@ function fillBoardRandomly() {
       control.value = getRandomLetter();
     }
   }
+  $('#solve-button').removeAttr('disabled');
 }
 
 function clearResults() {
