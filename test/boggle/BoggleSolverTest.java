@@ -42,13 +42,14 @@ public class BoggleSolverTest {
 
         Map<String, List<Cube>> words = solver.solve();
         assertTrue(!words.isEmpty());
-        assertEquals(287, words.size());
 
         words.entrySet().forEach(entry -> {
             System.out.print(entry.getKey() + " ====> ");
             entry.getValue().forEach(System.out::print);
             System.out.println("\n---------------------------");
         });
+
+        assertEquals(287, words.size());
     }
 
     @Test

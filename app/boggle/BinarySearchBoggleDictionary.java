@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,33 +56,48 @@ public class BinarySearchBoggleDictionary implements BoggleDictionary {
         return find(word, 0, words.size() - 1);
     }
 
+    @Override
+    public int findPrefix(String prefix) {
+        return find(prefix, 0, words.size() - 1, (o1, o2) -> {
+            if (o2.startsWith(o1)) {
+                return 0;
+            } else {
+                return o1.compareTo(o2);
+            }
+        });
+    }
+
     public String getWordAt(int index) {
         return words.get(index);
     }
 
     protected int find(String word, int start, int end) {
+        return find(word, start, end, Comparator.naturalOrder());
+    }
+
+    protected int find(String word, int start, int end, Comparator<String> compare) {
         int mid = (start + end) / 2;
 
         String w = words.get(mid);
 
         if (mid == start || mid == end) {
             // we are at the end of the line
-            int endResult = word.toUpperCase().compareTo(words.get(end).toUpperCase());
-            int startResult = word.toUpperCase().compareTo(words.get(start).toUpperCase());
+            int endResult = compare.compare(word.toUpperCase(), words.get(end).toUpperCase());
+            int startResult = compare.compare(word.toUpperCase(), words.get(start).toUpperCase());
 
             return endResult == 0 ? end : startResult == 0 ? start : -1;
         }
-        int result = word.toUpperCase().compareTo(w.toUpperCase());
+        int result = compare.compare(word.toUpperCase(), w.toUpperCase());
 
         if (result == 0) {
             // this is it!
             return mid;
         } else if (result < 0) {
             // look to the left
-            return find(word, start, mid - 1);
+            return find(word, start, mid - 1, compare);
         } else {
             // look to the right
-            return find(word, mid + 1, end);
+            return find(word, mid + 1, end, compare);
         }
     }
 }

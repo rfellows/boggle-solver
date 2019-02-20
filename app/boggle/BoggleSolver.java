@@ -47,7 +47,6 @@ public class BoggleSolver {
 
     protected void traverse(Cube cube, List<Cube> visited) {
         visited.add(cube);
-        boolean skipNextPaths = false;
 
         // boggle words have to be at least 3 characters
         if (visited.size() > 2) {
@@ -57,19 +56,28 @@ public class BoggleSolver {
                     .map(String::valueOf)
                     .collect(Collectors.joining(""));
 
-            int index = dictionary.find(possibleWord);
-            if (index > -1) {
-                words.putIfAbsent(possibleWord, visited);
+            //
+            // First, see if any words in the dictionary begin with the word we are looking for.
+            // If nothing even starts with it, we can just return and not process any more cubes in this path
+            //
+            int index = dictionary.findPrefix(possibleWord);
 
-                //
-                // If we found a valid word, we can peek ahead in the dictionary to see if the next word starts with this word.
-                // If it does not, we don't have to bother walking the adjacent cubes anymore
-                //
-                String peekAtNext = dictionary.getWordAt(index + 1);
-                if (!peekAtNext.toUpperCase().startsWith(possibleWord.toUpperCase())) {
-                    return;
+            if (index > -1) {
+                String prefixFound = dictionary.getWordAt(index);
+
+                if (prefixFound.equals(possibleWord)) {
+                    words.putIfAbsent(possibleWord, visited);
+                } else {
+                    // the prefix found is not our word exactly, so we still need to try to go find it
+                    index = dictionary.find(possibleWord);
+                    if (index > -1) {
+                        words.putIfAbsent(possibleWord, visited);
+                    }
                 }
+            } else {
+                return;
             }
+
         }
 
         // get the cubes that are next to this one, but filter out the ones we have already visited
